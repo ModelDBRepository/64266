@@ -1,0 +1,61 @@
+<html><head><title>Barrel Map Development</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head>
+<body>
+<hr width="100%">
+<font orig_color="#ffff00" face="Arial, Helvetica, sans-serif"> </font>
+<table border="0" width="100%">
+  <tbody><tr>
+    <td align="center" valign="top" width="80%"><h1><font orig_color="#ffff00" face="Arial, Helvetica, sans-serif">The role of efficient neurotransmitter release in barrel map development</font></h1></td>
+    <td align="right" width="20%"><img src="readme_files/LR" height="114" width="153"></td>
+  </tr>
+</tbody></table>
+<p align="justify"><font orig_color="#00ff00" face="Helvetica, Arial"><em>Modeling in support of</em><font face="Helvetica, Arial"><font face="Times New Roman, Times, serif"><em>:<br>
+</em></font></font></font><font face="Helvetica, Arial"><font face="Times New Roman, Times, serif" size="+1">Lu HC, Butts DA, Kaeser PS, She WC, Janz R, Crair MC (2006) <em>Journal of Neuroscience</em> <strong>26</strong>: 2692-2703.</font></font></p>
+<p align="justify"><font face="Arial, Helvetica, sans-serif">Mice with  a loss-of-function mutation of calcium/calmodulin-activated adenylyl cyclase I (AC1) - <font orig_color="#00ff00"><em>barrelless mice</em></font>
+- have strikingly abherrent cortical development: the thalamic
+afferents into the barrel cortex do not segregate into whisker-specific
+barrels. This paper investigates the link between this mutation and the
+"barrelless" phenotype, and demonstrates that the loss-of-function
+mutation leads to deficits in presynaptic mechanisms at the
+thalamocortical synapse.</font></p>
+<p align="justify"><font face="Arial, Helvetica, sans-serif">How might
+presynaptic deficits disrupt whisker-specific segregation in the barrel
+cortex? We used a model to demonstrate one possibility: decrease in the
+release probability at the thalamocortical synapse (which is observed
+in the <em>barrelless</em> mutant) can influence the balance between
+LTP and LTD (in favor of LTD), which can disrupt whisker segregaton.
+Though how this occurs is easily explained with a conceptual model
+(described succinctly in the above paper), we also produced a
+computational simulation of this phenomenon. </font></p>
+<p align="justify"><font orig_color="#ffff00" face="Arial, Helvetica, sans-serif" size="+1">Simple computational model of barrel-specific segregation</font></p>
+<p align="justify">This simulation was designed based on the limited
+knowledge of the physiology of the developing barrel cortex, and made
+minimal assumptions about unmeasured parameters. See the Methods
+section of the paper for details. This model is a proof-of-principle
+for how changes in presynaptic release probability can disrupt barrel
+segregation, and is by no means a proof that it occurs through this
+mechanism.</p>
+<p>The source code <a href="http://people.deas.harvard.edu/%7Edbutts/SourceCode/BarrelSim/BRLSmodel.c">BRLSmodel.c</a>
+is written in ansi c++ and was compiled on a Mac running OS 10. Many
+features of the simulation can be adjusted through the 'define' section
+at the beginning. On most unix systems, to compile at a UNIX prompt:</p>
+<p><font orig_color="#00ffff" face="Arial, Helvetica, sans-serif" size="-1">c++ BRLSmodel.c -O3 -lm -o sim</font></p>
+<p>To run:</p>
+<p><font orig_color="#00ffff" face="Arial, Helvetica, sans-serif" size="-1">./sim 32000 0.3 0.78 1 P03seg.dat</font></p>
+<p>where <font orig_color="#00ffff" face="Arial, Helvetica, sans-serif" size="-1">32000</font> is the simulation time in seconds, <font orig_color="#00ffff" face="Arial, Helvetica, sans-serif" size="-1">0.3</font> is the release probability, <font orig_color="#00ffff" face="Arial, Helvetica, sans-serif" size="-1">0.78</font> is the threshold of the cortical neuron, <font orig_color="#00ffff" face="Arial, Helvetica, sans-serif" size="-1">1</font> is the random number seed (any integer), and <font orig_color="#00ffff" face="Arial, Helvetica, sans-serif" size="-1">P03seg.dat</font>
+is the data file produced by the simulation. The data file is a table
+with successive columns representing the firing rate of the cortical
+neuron, the synaptic weights of the primary whisker, and those of the
+adjacent whisker, at 100 s intervals. All of these parameters can be
+changed by modifying the source code and recompiling. A <a href="http://people.deas.harvard.edu/%7Edbutts/SourceCode/BarrelSim/Figs.txt">file </a>demonstrating how this data can be analyzed in Matlab is also included. </p>
+<p>The threshold is initially chosen to result in a 0.1 Hz firing of
+the cortical neuron, and can initially be found by running the
+simulation in 'test' mode by entering a negative threshold. This will
+prevent synaptic weights from changing and average the postsynaptic
+firing rate over a longer time:</p>
+<p><font orig_color="#00ffff" face="Arial, Helvetica, sans-serif" size="-1">sim 4000 0.3 -0.78</font></p>
+<p>The source code of this simulation, as well as text files with
+command that produce sample data, and the data itself can be found in
+the following <a href="http://people.deas.harvard.edu/%7Edbutts/SourceCode/BarrelSim/">directory</a>. Please feel free to<a href="mailto:dbutts@deas.harvard.edu"> email me</a> with questions about the simulation. </p>
+</body></html>
